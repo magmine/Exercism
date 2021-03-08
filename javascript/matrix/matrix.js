@@ -21,7 +21,6 @@ export class Matrix {
   get columns() {
     const cols = [];
     const rows = this.rows();
-    cols
     rows.for_each((row, i) => {
       row[i].for_each((el, j) => {
 

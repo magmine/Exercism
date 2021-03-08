@@ -4,19 +4,10 @@
 //
 
 const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+const alphabetOccurnaces = {};
 
 export const isPangram = (text) => {
-  const alphabetOccurnaces = {};
-  alphabet.map((char) => { alphabetOccurnaces[char] = 0 }); // Great way to create a dynamic map
-  text = text.toLowerCase().trim();
-  // TODO: remove all non alphabetical characters from the text later on
-  for (let char of text) {
-    alphabetOccurnaces[char] = alphabetOccurnaces[char] + 1;
-  }
-  for (const char in alphabetOccurnaces) {
-    if (alphabetOccurnaces[char] === 0) {
-      return false;
-    }
-  }
-  return true;
+  //alphabet.map((char) => { alphabetOccurnaces[char] = 0 }); // Great way to create a dynamic map
+  text = text.toLowerCase().replace(/[^a-z]/g, ''); // replace anything not a-z to empty
+  return new Set(text).size === alphabet.length;
 };

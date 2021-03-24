@@ -12,6 +12,7 @@ class Garden:
     def __init__(self, diagram: str, students = []):
         self.diagram = diagram
         self.students = students if students else self.students
+        self.students = sorted(self.students)
 
     def plants(self, student: str) -> []:
         student_plants = []

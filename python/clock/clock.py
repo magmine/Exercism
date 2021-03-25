@@ -21,10 +21,5 @@ class Clock:
         return self
 
     def __sub__(self, minutes):
-        self.minute -= minutes
-        self.hour -= abs(self.minute) // 60
-        self.hour = self.hour - 1 if self.minute < 0 else self.hour
-        self.hour %= 24
-        self.minute %= 60
-        return self
+        return self + -minutes
 

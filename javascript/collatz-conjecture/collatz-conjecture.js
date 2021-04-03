@@ -3,19 +3,10 @@
 // convenience to get you started writing code faster.
 //
 
-export const steps = (num) => {
-  let step_count = 0;
-  if (num < 1) {
-    throw new Error('Only positive numbers are allowed');
-  }
-  let n = num;
-  while (n != 1) {
-    if (n % 2 === 0) {
-      n = n / 2;
-    } else {
-      n = (3 * n) + 1;
-    }
-    step_count++;
-  }
-  return step_count;
+export const steps = (num, step_count = 0) => {
+  if (num < 1) throw new Error('Only positive numbers are allowed');
+  if (num === 1) return step_count;
+  step_count++;
+  num = num % 2 === 0 ? num / 2 : (3 * num) + 1;
+  return steps(num, step_count);
 };

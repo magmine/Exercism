@@ -63,7 +63,21 @@ export class LinkedList {
 
   // shift gets first element from the list, and removes it after that
   shift() {
-    throw new Error('Remove this statement and implement this function');
+    let result;
+    if (this.count() === 0) throw new Error("Trying to shift an empty list");
+    result = this.head.value;
+    if (this.count() === 1) {
+      delete this.tail;
+      this.tail = null;
+      this.head = null;
+      this.length--;
+      return result;
+    }
+    let firstNode = this.head;
+    this.head = firstNode.next;
+    this.head.prev = firstNode.prev;
+    this.length--;
+    return result;
   }
 
   // unshift adds element at the start of the list

@@ -28,15 +28,9 @@ export class LinkedList {
       this.head = newNode;
       this.tail = newNode;
     } else {
-      let itNode = this.head;
-      while(itNode.next) {
-        itNode = itNode.next;
-      }
-      itNode.next = newNode;
-      newNode.prev = itNode;
-      newNode.next = this.head;
+      newNode.prev = this.tail;
+      this.tail.next = newNode;
       this.tail = newNode;
-      this.head.prev = newNode;
     }
     this.length++;
   }
@@ -55,7 +49,9 @@ export class LinkedList {
     }
     let lastNode = this.tail;
     this.tail = lastNode.prev;
-    this.tail.next = lastNode.next;
+    this.tail.next = null;
+    lastNode.next = null;
+    lastNode.prev = null;
     this.length--;
     return result;
     // delete lastNode;
@@ -82,11 +78,54 @@ export class LinkedList {
 
   // unshift adds element at the start of the list
   unshift(value) {
-    throw new Error('Remove this statement and implement this function');
+    const newNode = new Node(value);
+    if (this.count() !== 0) {
+      newNode.next = this.head;
+      newNode.prev = this.head.prev;
+      this.head.prev = newNode;
+      this.tail.prev = this.tail;
+    } else {
+      this.tail = newNode;
+    }
+    this.head = newNode;
+    this.length++;
   }
-  // delete an element given it's value
+
+  printList() {
+    let itNode = this.head;
+    const list = [];
+    while(itNode) {
+      list.push(itNode.value);
+      itNode = itNode.next;
+    }
+  }
+
+  // delete the occurance of first element given it's value
   delete(value) {
-    throw new Error('Remove this statement and implement this function');
+    let itNode = this.head;
+    while(itNode !== null) {
+      if (itNode.value === value) {
+        if (this.count() === 1) {
+          delete this.head;
+          this.head = null;
+          this.tail = null;
+        } else {
+          if (itNode.next) {
+            itNode.next.prev = itNode.prev;
+          } else {
+            this.tail = itNode.prev;
+          }
+          if (itNode.prev) {
+            itNode.prev.next = itNode.next;
+          } else {
+            this.head = itNode.next;
+          }
+        }
+        this.length--;
+        return;
+      }
+      itNode = itNode.next;
+    }
   }
 
   // gets the length of the list

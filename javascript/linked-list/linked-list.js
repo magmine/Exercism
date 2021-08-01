@@ -54,7 +54,6 @@ export class LinkedList {
     lastNode.prev = null;
     this.length--;
     return result;
-    // delete lastNode;
   }
 
   // shift gets first element from the list, and removes it after that

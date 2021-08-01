@@ -5,34 +5,37 @@
 
 export class Matrix {
   constructor(text) {
-    this.text = text;
+    this.matrix = []
+    this.inverseMatrix = []
+    const lines = text.split('\n');
+    lines.forEach((line, lineIndex) => {
+      this.matrix[lineIndex] = line.split(' ');
+    });
+    console.log(this.matrix)
   }
 
   get rows() {
-    const ch = "";
-    const lines = this.text.split('\n');
-    rows = [];
-    for (let i, line of lines) {
-      rows[i] = line.split(' ');
+    return this.matrix;
+  }
+
+  inverseMatrix = () => {
+    this.inverseMatrix = this.matrix
+    for (let i = 0; i < this.matrix.length; i++) {
+      for (let j = 0; j < this.matrix[i].length; j++) {
+        this.inverseMatrix[j][i] = this.matrix[i][j];
+      }
     }
-    return rows;
   }
 
   get columns() {
     const cols = [];
     const rows = this.rows();
-    rows.for_each((row, i) => {
-      row[i].for_each((el, j) => {
+    rows.forEach((row, i) => {
+      row[i].forEach((el, j) => {
+        
+      });
+    });
 
-      })
-    })
-    for (let i, row of rows) {
-      //let col = [];
-      for (let j, el of row) {
-        cols[j][i] = el;
-      }
-      //cols.push(col);
-    }
     return cols;
   }
 }
